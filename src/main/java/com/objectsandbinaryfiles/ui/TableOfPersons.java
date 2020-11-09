@@ -31,8 +31,16 @@ public class TableOfPersons extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        deleteUser = new javax.swing.JPopupMenu();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+
+        deleteUser.setToolTipText("Borrar Usuario");
+        deleteUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteUserMouseClicked(evt);
+            }
+        });
 
         setClosable(true);
         setTitle("Tabla de usuarios");
@@ -45,6 +53,7 @@ public class TableOfPersons extends javax.swing.JInternalFrame {
                 "DPI", "Nombre", "Edad"
             }
         ));
+        jTable1.setComponentPopupMenu(deleteUser);
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -67,6 +76,10 @@ public class TableOfPersons extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void deleteUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteUserMouseClicked
+        persons.remove(jTable1.getSelectedRow());
+    }//GEN-LAST:event_deleteUserMouseClicked
+
     public void actualizeTable() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         for ( int i = 0 ; i < persons.size() ; i++ ){
@@ -76,6 +89,7 @@ public class TableOfPersons extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu deleteUser;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
