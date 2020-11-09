@@ -20,6 +20,7 @@ public class MainUI extends javax.swing.JFrame {
     EditPerson ep = null;
     TableOfPersons tp = null;
     AddPerson ap = null;
+    DeleteUser du = null;
     
     /**
      * Creates new form MainUI
@@ -50,6 +51,7 @@ public class MainUI extends javax.swing.JFrame {
         omiAddPerson = new javax.swing.JMenuItem();
         showTable = new javax.swing.JMenuItem();
         omiEditPerson = new javax.swing.JMenuItem();
+        omiDeleteUser = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,6 +109,14 @@ public class MainUI extends javax.swing.JFrame {
         });
         jmSavePersons.add(omiEditPerson);
 
+        omiDeleteUser.setText("Borrar usuaio");
+        omiDeleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                omiDeleteUserActionPerformed(evt);
+            }
+        });
+        jmSavePersons.add(omiDeleteUser);
+
         jMenuBar1.add(jmSavePersons);
 
         setJMenuBar(jMenuBar1);
@@ -157,6 +167,14 @@ public class MainUI extends javax.swing.JFrame {
         ep.show();
     }//GEN-LAST:event_omiEditPersonActionPerformed
 
+    private void omiDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_omiDeleteUserActionPerformed
+        if ( du == null || du.isClosed() ) {
+            du = new DeleteUser();
+            dp1.add(du);
+        }
+        du.show();
+    }//GEN-LAST:event_omiDeleteUserActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -200,6 +218,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JMenu jmSavePersons;
     private javax.swing.JMenuItem jmSavePersonsAsCSV;
     private javax.swing.JMenuItem omiAddPerson;
+    private javax.swing.JMenuItem omiDeleteUser;
     private javax.swing.JMenuItem omiEditPerson;
     private javax.swing.JMenuItem showTable;
     // End of variables declaration//GEN-END:variables
