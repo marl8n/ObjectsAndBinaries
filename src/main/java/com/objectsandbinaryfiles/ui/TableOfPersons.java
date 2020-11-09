@@ -6,6 +6,8 @@
 package com.objectsandbinaryfiles.ui;
 
 import static com.objectsandbinaryfiles.files.DataAndList.persons;
+import com.objectsandbinaryfiles.files.SaveFile;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,16 +33,29 @@ public class TableOfPersons extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        deleteUser = new javax.swing.JPopupMenu();
+        puTable = new javax.swing.JPopupMenu();
+        miDeleteUser = new javax.swing.JMenuItem();
+        editPerson = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        deleteUser.setToolTipText("Borrar Usuario");
-        deleteUser.addMouseListener(new java.awt.event.MouseAdapter() {
+        puTable.setToolTipText("Borrar Usuario");
+        puTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                deleteUserMouseClicked(evt);
+                puTableMouseClicked(evt);
             }
         });
+
+        miDeleteUser.setText("Borrar Persona");
+        miDeleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miDeleteUserActionPerformed(evt);
+            }
+        });
+        puTable.add(miDeleteUser);
+
+        editPerson.setText("Editar persona");
+        puTable.add(editPerson);
 
         setClosable(true);
         setTitle("Tabla de usuarios");
@@ -53,7 +68,7 @@ public class TableOfPersons extends javax.swing.JInternalFrame {
                 "DPI", "Nombre", "Edad"
             }
         ));
-        jTable1.setComponentPopupMenu(deleteUser);
+        jTable1.setComponentPopupMenu(puTable);
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -76,12 +91,22 @@ public class TableOfPersons extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void deleteUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteUserMouseClicked
+    private void puTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_puTableMouseClicked
         persons.remove(jTable1.getSelectedRow());
-    }//GEN-LAST:event_deleteUserMouseClicked
+    }//GEN-LAST:event_puTableMouseClicked
+
+    private void miDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miDeleteUserActionPerformed
+        if ( jTable1.getSelectedRow() > -1 ) {
+            JOptionPane.showMessageDialog(rootPane, "Ha eliminado a: " + persons.get(jTable1.getSelectedRow()).getName());
+            persons.remove(jTable1.getSelectedRow());
+            SaveFile.saveObjects();
+            this.actualizeTable();
+        }
+    }//GEN-LAST:event_miDeleteUserActionPerformed
 
     public void actualizeTable() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
         for ( int i = 0 ; i < persons.size() ; i++ ){
             model.addRow(persons.get(i).getInfoAsObjectArray());
         }
@@ -89,8 +114,10 @@ public class TableOfPersons extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPopupMenu deleteUser;
+    private javax.swing.JMenuItem editPerson;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JMenuItem miDeleteUser;
+    private javax.swing.JPopupMenu puTable;
     // End of variables declaration//GEN-END:variables
 }
